@@ -3,31 +3,27 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const LandingScreen = () => {
-  const  navigation = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      {/* Top Left Farmer Logo */}
-      <Image 
-        source={require("./../assets/images/farmer.jpg")}  
-        style={styles.logo} 
-      />
+      {/* Farmer Logo (Round) */}
+      <Image source={require("../assets/images/farmer.jpg")} style={styles.logo} />
 
-      {/* Rounded Tractor Image */}
-      <Image 
-        source={require("./../assets/images/tractor.jpg")}  
-        style={styles.tractor} 
-      />
+      {/* Clouds Image on the Right */}
+      <Image source={require("../assets/images/clouds.png")} style={styles.clouds} />
 
-      {/* Footer */}
-      <View style={styles.footer}>
+      {/* Tractor Image */}
+      <Image source={require("../assets/images/tractor.jpg")} style={styles.tractor} />
+
+      {/* Footer & Button Section */}
+      <View style={styles.bottomContainer}>
         <Text style={styles.footerText}>Empowering Farmers for a Better Future</Text>
-      </View>
 
-      {/* Continue Button */}
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
-        <Text style={styles.buttonText}>Continue</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.buttonText}>Continue</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -37,41 +33,48 @@ export default LandingScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#DFF6DD", // Light green background
+    backgroundColor: "#AEE2FF",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
   },
   logo: {
-    width: 80,
-    height: 80,
-    resizeMode: "contain",
+    width: 100,
+    height: 100,
+    borderRadius: 50,
     position: "absolute",
-    borderRadius: 100,
-    top: 25,
+    top: 40,
     left: 20,
   },
-  tractor: {
-    width: 300,
-    height: 300,
-    resizeMode: "cover",
+  clouds: {
+    width: 120,
+    height: 80,
     position: "absolute",
-    top: 150,
-    borderRadius: 150,
-    borderWidth: 5,
-    borderColor: "#6A994E",
+    top: 50,
+    right: 20,
+    resizeMode: "contain",
   },
-  footer: {
+  tractor: {
+    width: 320,
+    height: 320,
+    resizeMode: "cover",
+    borderRadius: 160,
+    borderWidth: 5,
+    borderColor: "#4A90E2",
+    marginTop: 160,
+  },
+  bottomContainer: {
     position: "absolute",
-    bottom: 100,
+    bottom: 40,
     alignItems: "center",
+    width: "100%",
   },
   footerText: {
     fontSize: 16,
-    color: "#6A994E",
+    color: "#003366",
+    fontWeight: "bold",
+    marginBottom: 20,
   },
   button: {
-    position: "absolute",
-    bottom: 40,
     backgroundColor: "#2C5F2D",
     paddingVertical: 12,
     paddingHorizontal: 40,
