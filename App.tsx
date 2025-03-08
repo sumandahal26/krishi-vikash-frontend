@@ -9,6 +9,7 @@ import weather from "./screens/weather";
 import profile from "./screens/profile";
 import govtschemes from "./screens/govtschemes";
 import preharvest from "./screens/preharvest";
+import Registration from "./screens/Registration";
 
 
 
@@ -27,6 +28,7 @@ const App = () => {
         <Stack.Screen name="Profile" component={profile} />
         <Stack.Screen name="GovtSchemes" component={govtschemes} />
         <Stack.Screen name="Preharvest" component={preharvest} />
+        <Stack.Screen name="Registration" component={Registration}/>
         
       </Stack.Navigator>
     </NavigationContainer>

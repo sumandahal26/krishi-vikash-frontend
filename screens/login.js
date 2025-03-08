@@ -1,201 +1,153 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 
-const login = () => {
-  const [phone, setPhone] = useState("");
-  const [otp, setOtp] = useState("");
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
-  const {navigate} = useNavigation()
-
-  const handleRegister = () => {
-    console.log("Registering user...");
-    // TODO: Implement OTP authentication logic
-  };
-
+const LoginScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      {/* Logo & Title */}
-      <View style={styles.logoContainer}>
-        <Icon name="leaf" size={50} color="green" />
-        <Text style={styles.title}>Farmer Login & Registration</Text>
-      </View>
+    <View style={styles.background}>
+      {/* Farmer Images (Replacing Clouds) */}
+      <Image source={require("./../assets/images/clouds.png")} style={[styles.farmerImage, styles.topLeftImage]} />
+      <Image source={require("./../assets/images/clouds.png")} style={[styles.farmerImage, styles.topRightImage]} />
 
-      {/* Main Green Heading */}
-      <Text style={styles.farmerText}>Farmer</Text>
+      {/* Main Farmer Image */}
+      <Image source={require("./../assets/images/farmer.jpg")} style={styles.farmerMainImage} />
 
-      {/* Login & Registration Button */}
-      <TouchableOpacity style={styles.authButton}>
-        <Text style={styles.authButtonText}>Login & Registration</Text>
-      </TouchableOpacity>
+      {/* Login Container */}
+      <View style={styles.container}>
+        <Text style={styles.title}>Login</Text>
 
-      {/* OTP Registration Button */}
-      <TouchableOpacity style={styles.otpButton}>
-        <Text style={styles.otpButtonText}>Regd OTP</Text>
-      </TouchableOpacity>
+        {/* Phone Input */}
+        <View style={styles.inputContainer}>
+          <Icon name="phone" size={20} color="#666" style={styles.icon} />
+          <TextInput placeholder="Phone Number" style={styles.input} keyboardType="phone-pad" />
+        </View>
 
-      {/* Input Fields */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Phone Number:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter phone number"
-          keyboardType="numeric"
-          value={phone}
-          onChangeText={setPhone}
-        />
-      </View>
+        {/* Password Input */}
+        <View style={styles.inputContainer}>
+          <Icon name="lock" size={20} color="#666" style={styles.icon} />
+          <TextInput placeholder="Password" style={styles.input} secureTextEntry />
+        </View>
 
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>OTP:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter OTP"
-          keyboardType="numeric"
-          value={otp}
-          onChangeText={setOtp}
-        />
-      </View>
+        {/* Forgot Password */}
+        <View style={styles.options}>
+          <TouchableOpacity>
+            <Text style={styles.forgotPassword}>Forgot Password?</Text>
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Name:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your name"
-          value={name}
-          onChangeText={setName}
-        />
-      </View>
-
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Location Size:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter location size"
-          value={location}
-          onChangeText={setLocation}
-        />
-      </View>
-
-      {/* Submit Buttons */}
-      <View style={styles.buttonRow}>
-        <TouchableOpacity style={styles.submitButton} onPress={()=>navigate("Dashboard")}>
-          <Text style={styles.submitButtonText}>Submit</Text>
+        {/* Login Button */}
+        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate("Dashboard")}>
+          <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.suggestButton}>
-          <Text style={styles.suggestButtonText}>Suggest</Text>
-        </TouchableOpacity>
+        {/* Register Option */}
+        <Text style={styles.registerText}>
+          Don't have an account? <Text style={styles.registerLink} onPress={() => navigation.navigate("Registration")}>Register</Text>
+        </Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    backgroundColor: "#f5f5dc",
-    alignItems: "center",
+    backgroundColor: "#AEE2FF", // Sky blue color
     justifyContent: "center",
-    paddingHorizontal: 20,
-  },
-  logoContainer: {
     alignItems: "center",
-    marginBottom: 20,
+  },
+
+  /* Farmer Images Replacing Clouds */
+  topLeftImage: {
+    position: "absolute",
+    top: 30,
+    left: 20,
+    width: 80,
+    height: 80,
+    borderRadius: 40, // Circular farmer image
+  },
+  topRightImage: {
+    position: "absolute",
+    top: 40,
+    right: 30,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+  },
+
+  /* Main Farmer Image */
+  farmerMainImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50, // Circular frame
+    marginBottom: 10,
+  },
+
+  /* Login Card */
+  container: {
+    backgroundColor: "rgba(255, 255, 255, 0.6)", // Transparent white
+    padding: 20,
+    borderRadius: 70,
+    width: "90%",
+    maxWidth: 350,
+    alignItems: "center",
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#2e7d32",
-    textAlign: "center",
-  },
-  farmerText: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "green",
-    marginVertical: 10,
-  },
-  authButton: {
-    backgroundColor: "#6FCF97",
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 10,
-    width: "80%",
-    alignItems: "center",
-  },
-  authButtonText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "white",
-  },
-  otpButton: {
-    backgroundColor: "green",
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 10,
-    width: "80%",
-    alignItems: "center",
-  },
-  otpButtonText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "white",
+    marginBottom: 20,
   },
   inputContainer: {
-    width: "100%",
-    marginBottom: 10,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 5,
-  },
-  input: {
-    height: 40,
-    borderWidth: 1,
-    borderColor: "#ccc",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#f0f0f0",
     borderRadius: 8,
     paddingHorizontal: 10,
-    backgroundColor: "white",
+    marginVertical: 10,
+    width: "100%",
   },
-  buttonRow: {
+  icon: {
+    marginRight: 10,
+  },
+  input: {
+    flex: 1,
+    paddingVertical: 10,
+  },
+
+  /* Options */
+  options: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "80%",
-    marginTop: 20,
+    width: "100%",
+    marginBottom: 15,
   },
-  submitButton: {
-    backgroundColor: "green",
-    padding: 12,
-    borderRadius: 8,
-    width: "45%",
+  forgotPassword: {
+    color: "#007bff",
+  },
+
+  /* Login Button */
+  loginButton: {
+    backgroundColor: "#007bff",
+    paddingVertical: 12,
+    width: "100%",
+    borderRadius: 30,
     alignItems: "center",
   },
-  submitButtonText: {
+  loginText: {
+    color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
-    color: "white",
   },
-  suggestButton: {
-    backgroundColor: "#4CAF50",
-    padding: 12,
-    borderRadius: 8,
-    width: "45%",
-    alignItems: "center",
+
+  /* Register Option */
+  registerText: {
+    marginTop: 10,
+    fontSize: 14,
   },
-  suggestButtonText: {
-    fontSize: 16,
+  registerLink: {
+    color: "#007bff",
     fontWeight: "bold",
-    color: "white",
   },
 });
 
-export default login;
+export default LoginScreen;
