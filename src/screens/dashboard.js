@@ -27,6 +27,7 @@ const DashboardScreen = ({ navigation }) => {
         `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&units=metric&appid=${API_KEY}`
       );
       const data = await response.json();
+      console.log(data)
       setWeatherData(data);
       setLoading(false);
       setBackgroundImage(getBackgroundImage(data));

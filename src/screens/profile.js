@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image, ScrollView 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-
+import CustomBottomNav from '../components/bottomTab';
 const profile = ({ navigation }) => {
   const [name, setName] = useState('Farmer Name');
   const [soilType, setSoilType] = useState('3.90');
@@ -60,6 +60,7 @@ const profile = ({ navigation }) => {
           </TouchableOpacity>
         </View> */}
       </ScrollView>
+      <CustomBottomNav></CustomBottomNav>
     </View>
   );
 };

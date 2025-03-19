@@ -32,11 +32,9 @@ export default function PostHarvestDetails({route}){
       <Text style={styles.label}>🌾 Seed Type:</Text>
       <Text style={styles.value}>{item.type}</Text>
 
-      <Text style={styles.label}>🧪 Fertilizer:</Text>
-      <Text style={styles.value}>{item.fertilizer}</Text>
+     
 
-      <Text style={styles.label}>📜 Description:</Text>
-      <Text style={styles.value}>{item.description}</Text>
+     
     </View>
   ))}
 </ScrollView>

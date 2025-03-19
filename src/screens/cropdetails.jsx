@@ -3,6 +3,6 @@ export default function CropDeatislScreen({route}){
     const {crop} =route.params
     console.log(crop)
     return(
-        <CropDetails></CropDetails>
+        <CropDetails crop={crop}></CropDetails>
     )
 }

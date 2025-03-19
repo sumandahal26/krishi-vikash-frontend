@@ -27,19 +27,19 @@ const CropDetails = ({ crop }) => {
           <Text style={styles.value}>{crop[0]?.crop.type}</Text>
 
           <Text style={styles.label}>Season:</Text>
-          <Text style={styles.value}>{crop[0]?.season}</Text>
+          <Text style={styles.value}>{crop[0]?.crop.season}</Text>
 
           <Text style={styles.label}>Soil Type:</Text>
-          <Text style={styles.value}>{crop[0]?.soil_type}</Text>
+          <Text style={styles.value}>{crop[0]?.crop.soil_type}</Text>
 
           <Text style={styles.label}>Temperature Range:</Text>
-          <Text style={styles.value}>{crop[0]?.temperature_range}</Text>
+          <Text style={styles.value}>{crop[0]?.crop.temperature_range}</Text>
 
           <Text style={styles.label}>Water Requirement:</Text>
-          <Text style={styles.value}>{crop[0]?.water_requirement} mm</Text>
+          <Text style={styles.value}>{crop[0]?.crop.water_requirement} mm</Text>
 
           <Text style={styles.label}>Market Demand:</Text>
-          <Text style={styles.value}>{crop[0]?.market_demand}</Text>
+          <Text style={styles.value}>{crop[0]?.crop.market_demand}</Text>
         </View>
       )}
 

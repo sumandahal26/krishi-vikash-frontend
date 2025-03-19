@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { useNavigation } from '@react-navigation/native';
 const CustomBottomNav = ({ state, navigation }) => {
   const tabs = [
-    { name: 'Home', icon: 'home-outline' },
-    { name: 'Profile', icon: 'person-outline' },
-    { name: 'Settings', icon: 'settings-outline' },
+    { name: 'Home', icon: 'home-outline', nav:"Dashboard" },
+    { name: 'Profile', icon: 'person-outline', nav:"Profile" },
+    { name: 'Settings', icon: 'settings-outline', nav:"Settings" },
   ];
+  const {navigate}= useNavigation()
 
   return (
     <View style={styles.navContainer}>
@@ -16,7 +17,7 @@ const CustomBottomNav = ({ state, navigation }) => {
         return (
           <TouchableOpacity
             key={tab.name}
-            onPress={() => navigation.navigate(tab.name)}
+            onPress={() => navigate(tab.nav)}
             style={styles.tab}
           >
             <Icon

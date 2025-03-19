@@ -36,7 +36,7 @@ const Crops = ({ navigation }) => {
           style={styles.iconContainer}
           onPress={() => navigation.navigate("postharvest")}
         >
-          <FontAwesome5 name="basket-loaded" size={40} color="#4CAF50" />
+          <FontAwesome5 name="shopping-cart" size={40} color="#4CAF50" />
           <Text style={styles.iconText}>Post-Harvest</Text>
         </TouchableOpacity>
       </View>
