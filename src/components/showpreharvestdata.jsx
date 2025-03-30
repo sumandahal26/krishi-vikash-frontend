@@ -1,22 +1,50 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Linking, Modal } from "react-native";
+
+const links = {
+  market: [
+    { name: "AgriMarket", url: "https://agrimarket.gov.in" },
+    { name: "eNAM", url: "https://enam.gov.in" },
+    { name: "Krishi Market", url: "https://krishimarket.in" }
+  ],
+  finance: [
+    { name: "NABARD", url: "https://nabard.org" },
+    { name: "AgriFinance", url: "https://agrifinance.in" },
+    { name: "PM Kisan", url: "https://pmkisan.gov.in" }
+  ],
+  insurance: [
+    { name: "PMFBY", url: "https://pmfby.gov.in" },
+    { name: "Agriculture Insurance Co.", url: "https://aicofindia.com" },
+    { name: "State Crop Insurance", url: "https://statecropinsurance.com" }
+  ]
+};
 
 const CropDetails = ({ crop }) => {
- console.log("crop",crop) // Get data from navigation
-
   const [showCropDetails, setShowCropDetails] = useState(false);
   const [showFertilizerDetails, setShowFertilizerDetails] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentLinks, setCurrentLinks] = useState([]);
+  const [modalTitle, setModalTitle] = useState("");
+
+  const openLinkModal = (linkType) => {
+    setCurrentLinks(links[linkType]);
+    setModalTitle(
+      linkType === "market" ? "Market Resources" : 
+      linkType === "finance" ? "Finance Sources" : "Insurance Providers"
+    );
+    setModalVisible(true);
+  };
+
+  const handleLinkPress = (url) => {
+    setModalVisible(false);
+    Linking.openURL(url);
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {/* Crop Name */}
       <Text style={styles.header}>{crop[0]?.name}</Text>
 
-      {/* Toggle Crop Details */}
-      <TouchableOpacity
-        style={styles.toggleButton}
-        onPress={() => setShowCropDetails(!showCropDetails)}
-      >
+      <TouchableOpacity style={styles.toggleButton} onPress={() => setShowCropDetails(!showCropDetails)}>
         <Text style={styles.sectionTitle}>🌾 Crop Details</Text>
         <Text style={styles.arrow}>{showCropDetails ? "▲" : "▼"}</Text>
       </TouchableOpacity>
@@ -39,15 +67,13 @@ const CropDetails = ({ crop }) => {
           <Text style={styles.value}>{crop[0]?.crop.water_requirement} mm</Text>
 
           <Text style={styles.label}>Market Demand:</Text>
-          <Text style={styles.value}>{crop[0]?.crop.market_demand}</Text>
+          <TouchableOpacity onPress={() => openLinkModal("market")}>
+            <Text style={[styles.value, styles.linkText]}>View Market Resources</Text>
+          </TouchableOpacity>
         </View>
       )}
 
-      {/* Toggle Fertilizer Details */}
-      <TouchableOpacity
-        style={styles.toggleButton}
-        onPress={() => setShowFertilizerDetails(!showFertilizerDetails)}
-      >
+      <TouchableOpacity style={styles.toggleButton} onPress={() => setShowFertilizerDetails(!showFertilizerDetails)}>
         <Text style={styles.sectionTitle}>🧪 Fertilizer Details</Text>
         <Text style={styles.arrow}>{showFertilizerDetails ? "▲" : "▼"}</Text>
       </TouchableOpacity>
@@ -71,7 +97,6 @@ const CropDetails = ({ crop }) => {
         </View>
       )}
 
-      {/* Other Details */}
       <View style={styles.card}>
         <Text style={styles.label}>🌱 Seed Quality:</Text>
         <Text style={styles.value}>{crop[0]?.seed_quality}</Text>
@@ -80,11 +105,44 @@ const CropDetails = ({ crop }) => {
         <Text style={styles.value}>{crop[0]?.pest_control_measures}</Text>
 
         <Text style={styles.label}>🏦 Finance Source:</Text>
-        <Text style={styles.value}>{crop[0].finance_source}</Text>
+        <TouchableOpacity onPress={() => openLinkModal("finance")}>
+          <Text style={[styles.value, styles.linkText]}>View Finance Options</Text>
+        </TouchableOpacity>
 
         <Text style={styles.label}>📜 Insurance Provider:</Text>
-        <Text style={styles.value}>{crop[0].insurance_provider}</Text>
+        <TouchableOpacity onPress={() => openLinkModal("insurance")}>
+          <Text style={[styles.value, styles.linkText]}>View Insurance Options</Text>
+        </TouchableOpacity>
       </View>
+
+      {/* Resource Links Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>{modalTitle}</Text>
+            {currentLinks.map((link, index) => (
+              <TouchableOpacity 
+                key={index} 
+                style={styles.modalButton}
+                onPress={() => handleLinkPress(link.url)}
+              >
+                <Text style={styles.modalButtonText}>{link.name}</Text>
+              </TouchableOpacity>
+            ))}
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 };
@@ -139,6 +197,56 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "black",
     marginBottom: 5,
+  },
+  linkText: {
+    color: "blue",
+    textDecorationLine: "underline",
+  },
+  // Modal styles
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContent: {
+    width: "80%",
+    backgroundColor: "white",
+    borderRadius: 10,
+    padding: 20,
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 15,
+    color: "green",
+  },
+  modalButton: {
+    backgroundColor: "#e8f5e9",
+    padding: 12,
+    borderRadius: 5,
+    width: "100%",
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "green",
+  },
+  modalButtonText: {
+    fontSize: 16,
+    color: "green",
+    textAlign: "center",
+  },
+  closeButton: {
+    marginTop: 15,
+    padding: 10,
+    backgroundColor: "green",
+    borderRadius: 5,
+    width: "100%",
+  },
+  closeButtonText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
   },
 });
 

@@ -124,6 +124,13 @@ const DashboardScreen = ({ navigation }) => {
           <FontAwesome5 name="seedling" size={30} color="#4CAF50" />
           <Text style={styles.navText}>Crops</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => navigation.navigate("Market")}
+        >
+          <FontAwesome5 name="store" size={30} color="#4CAF50" />
+          <Text style={styles.navText}>LULC</Text>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );

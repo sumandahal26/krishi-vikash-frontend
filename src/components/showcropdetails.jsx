@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
-export default function PostHarvestDetails({route}){
-    const {crop} =route.params
-    console.log(crop)
+export default function PostHarvestDetails({ route }) {
+  const { crop } = route.params;
+  console.log(crop);
+
   if (!crop) {
     return (
       <View style={styles.container}>
@@ -18,29 +19,42 @@ export default function PostHarvestDetails({route}){
       <View style={styles.greenBorder} />
 
       {/* Page Title */}
-      <Text style={styles.title}>{crop?.name} Details</Text>
+     
 
       {/* Crop Details */}
       <ScrollView contentContainerStyle={styles.content}>
-  {crop.map((item, idx) => (
-      
-    <View key={idx} style={styles.card}>
-        <Text style={styles.title}>{crop?.name} Details</Text>
-      <Text style={styles.label}>🌱 Season:</Text>
-      <Text style={styles.value}>{item.season}</Text>
+        {crop.map((item, idx) => (
+          <View key={idx} style={styles.card}>
+            <Text style={styles.title}>{item?.name} Details</Text>
+            <Text style={styles.label}>🌱 Season:</Text>
+            <Text style={styles.value}>{item.season}</Text>
 
-      <Text style={styles.label}>🌾 Seed Type:</Text>
-      <Text style={styles.value}>{item.type}</Text>
+            <Text style={styles.label}>🌾 Seed Type:</Text>
+            <Text style={styles.value}>{item.type}</Text>
 
-     
+            <Text style={styles.label}>🌡️ Temperature Range:</Text>
+            <Text style={styles.value}>{item.temperature_range}</Text>
 
-     
-    </View>
-  ))}
-</ScrollView>
+            <Text style={styles.label}>🌍 Soil Type:</Text>
+            <Text style={styles.value}>{item.soil_type}</Text>
+
+            <Text style={styles.label}>💧 Water Requirement:</Text>
+            <Text style={styles.value}>{item.water_requirement}</Text>
+
+            <Text style={styles.label}>📈 Market Demand:</Text>
+            <Text style={styles.value}>{item.market_demand}</Text>
+
+            <Text style={styles.label}>🌾 Average Yield (kg/ha):</Text>
+            <Text style={styles.value}>{item.average_yield}</Text>
+
+            <Text style={styles.label}>⏳ Growth Duration (days):</Text>
+            <Text style={styles.value}>{item.growth_duration}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F5F5F5', padding: 20 },
@@ -56,6 +70,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
+    marginBottom: 15,
   },
   label: { fontSize: 16, fontWeight: 'bold', color: '#333', marginBottom: 5 },
   value: { fontSize: 14, color: '#666', marginBottom: 15 },
