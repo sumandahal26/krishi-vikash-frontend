@@ -96,41 +96,49 @@ const DashboardScreen = ({ navigation }) => {
 
       {/* Navigation Grid */}
       <View style={styles.navGrid}>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => navigation.navigate("Market")}
-        >
-          <FontAwesome5 name="store" size={30} color="#4CAF50" />
-          <Text style={styles.navText}>Market</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => navigation.navigate("Weather")}
-        >
-          <FontAwesome5 name="cloud-sun" size={30} color="#4CAF50" />
-          <Text style={styles.navText}>Weather</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => navigation.navigate("GovtSchemes")}
-        >
-          <FontAwesome5 name="landmark" size={30} color="#4CAF50" />
-          <Text style={styles.navText}>Schemes</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => navigation.navigate("Crops")}
-        >
-          <FontAwesome5 name="seedling" size={30} color="#4CAF50" />
-          <Text style={styles.navText}>Crops</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => navigation.navigate("Market")}
-        >
-          <FontAwesome5 name="store" size={30} color="#4CAF50" />
-          <Text style={styles.navText}>LULC</Text>
-        </TouchableOpacity>
+        <View style={styles.gridRow}>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => navigation.navigate("Market")}
+          >
+            <FontAwesome5 name="store" size={30} color="#4CAF50" />
+            <Text style={styles.navText}>Market</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => navigation.navigate("Weather")}
+          >
+            <FontAwesome5 name="cloud-sun" size={30} color="#4CAF50" />
+            <Text style={styles.navText}>Weather</Text>
+          </TouchableOpacity>
+        </View>
+        
+        <View style={styles.gridRow}>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => navigation.navigate("GovtSchemes")}
+          >
+            <FontAwesome5 name="landmark" size={30} color="#4CAF50" />
+            <Text style={styles.navText}>Schemes</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => navigation.navigate("Crops")}
+          >
+            <FontAwesome5 name="seedling" size={30} color="#4CAF50" />
+            <Text style={styles.navText}>Crops</Text>
+          </TouchableOpacity>
+        </View>
+        
+        <View style={styles.centeredRow}>
+          <TouchableOpacity
+            style={[styles.iconContainer, styles.lulcContainer]}
+            onPress={() => navigation.navigate("LULC")}
+          >
+            <FontAwesome5 name="layer-group" size={30} color="#4CAF50" />
+            <Text style={styles.navText}>LULC</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ImageBackground>
   );
@@ -180,19 +188,25 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   navGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
     marginTop: 50,
     paddingHorizontal: 20,
   },
+  gridRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+  centeredRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
   iconContainer: {
     alignItems: "center",
-    width: "40%",
-    marginBottom: 30,
+    width: "45%",
     padding: 20,
     borderRadius: 15,
-    backgroundColor: "rgba(245, 245, 245, 0.8)", // Semi-transparent background
+    backgroundColor: "rgba(245, 245, 245, 0.8)",
     elevation: 3,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -200,6 +214,9 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     borderWidth: 2,
     borderColor: "#4CAF50",
+  },
+  lulcContainer: {
+    width: "45%", // Same width as other icons
   },
   navText: {
     color: "#000",

@@ -95,7 +95,7 @@ const App = () => {
         <Stack.Screen name="Crops" component={Crops} />
         <Stack.Screen name="CroprRecommand" component={CropRecomand} />
         <Stack.Screen name="CropDetails" component={CropDetails} />
-        <Stack.Screen name="PostHarvest" component={PostHarvest} />
+        <Stack.Screen name="postharvest" component={PostHarvest} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,8 +1,67 @@
-import React from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
+import React, { useState } from "react";
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  StyleSheet, 
+  Image, 
+  Alert,
+  ActivityIndicator 
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import apiService from "../services/apiservices";
 
 const LoginScreen = ({ navigation }) => {
+  const [form, setForm] = useState({
+    email: "",
+    password: ""
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    // Validation
+    if (!form.email || !form.password) {
+      Alert.alert("Error", "Please fill all required fields");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const loginData = {
+        email: form.email,
+        password: form.password,
+      };
+
+      const response = await apiService.postData("/auth/login", loginData);
+
+      if (response.message === "Login successful") {
+        Alert.alert("Success", "Login successful!");
+        console.log(response.data);
+
+        // Save user data in AsyncStorage
+        await AsyncStorage.setItem("user", JSON.stringify(response.farmer));
+
+        navigation.navigate("Dashboard");
+      } else {
+        Alert.alert("Error", response.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      Alert.alert("Error", "An error occurred during login");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value
+    });
+  };
+
   return (
     <View style={styles.background}>
       {/* Farmer Images (Replacing Clouds) */}
@@ -16,33 +75,60 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.container}>
         <Text style={styles.title}>Login</Text>
 
-        {/* Phone Input */}
+        {/* Email Input */}
         <View style={styles.inputContainer}>
-          <Icon name="phone" size={20} color="#666" style={styles.icon} />
-          <TextInput placeholder="Phone Number" style={styles.input} keyboardType="phone-pad" />
+          <Icon name="envelope" size={20} color="#666" style={styles.icon} />
+          <TextInput 
+            placeholder="Email" 
+            style={styles.input} 
+            value={form.email} 
+            onChangeText={(text) => handleChange("email", text)} 
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
         </View>
 
         {/* Password Input */}
         <View style={styles.inputContainer}>
           <Icon name="lock" size={20} color="#666" style={styles.icon} />
-          <TextInput placeholder="Password" style={styles.input} secureTextEntry />
+          <TextInput 
+            placeholder="Password" 
+            style={styles.input} 
+            secureTextEntry 
+            value={form.password}
+            onChangeText={(text) => handleChange("password", text)}
+          />
         </View>
 
         {/* Forgot Password */}
         <View style={styles.options}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
 
         {/* Login Button */}
-        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate("Dashboard")}>
-          <Text style={styles.loginText}>Login</Text>
+        <TouchableOpacity 
+          style={styles.loginButton} 
+          onPress={handleLogin}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.loginText}>Login</Text>
+          )}
         </TouchableOpacity>
 
         {/* Register Option */}
         <Text style={styles.registerText}>
-          Don't have an account? <Text style={styles.registerLink} onPress={() => navigation.navigate("Registration")}>Register</Text>
+          Don't have an account?{' '}
+          <Text 
+            style={styles.registerLink} 
+            onPress={() => navigation.navigate("Registration")}
+          >
+            Register
+          </Text>
         </Text>
       </View>
     </View>
@@ -52,40 +138,31 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "#AEE2FF", // Sky blue color
+    backgroundColor: "#AEE2FF",
     justifyContent: "center",
     alignItems: "center",
   },
-
-  /* Farmer Images Replacing Clouds */
-  topLeftImage: {
+  farmerImage: {
     position: "absolute",
+    width: 80,
+    height: 80,
+  },
+  topLeftImage: {
     top: 30,
     left: 20,
-    width: 80,
-    height: 80,
-    borderRadius: 40, // Circular farmer image
   },
   topRightImage: {
-    position: "absolute",
     top: 40,
     right: 30,
-    width: 80,
-    height: 80,
-    borderRadius: 40,
   },
-
-  /* Main Farmer Image */
   farmerMainImage: {
     width: 100,
     height: 100,
-    borderRadius: 50, // Circular frame
+    borderRadius: 50,
     marginBottom: 10,
   },
-
-  /* Login Card */
   container: {
-    backgroundColor: "rgba(255, 255, 255, 0.6)", // Transparent white
+    backgroundColor: "rgba(255, 255, 255, 0.6)",
     padding: 20,
     borderRadius: 70,
     width: "90%",
@@ -113,19 +190,15 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 10,
   },
-
-  /* Options */
   options: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     width: "100%",
     marginBottom: 15,
   },
   forgotPassword: {
     color: "#007bff",
   },
-
-  /* Login Button */
   loginButton: {
     backgroundColor: "#007bff",
     paddingVertical: 12,
@@ -138,8 +211,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-
-  /* Register Option */
   registerText: {
     marginTop: 10,
     fontSize: 14,
