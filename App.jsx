@@ -16,7 +16,9 @@ import Crops from "./src/screens/crop";
 import CropRecomand from "./src/screens/croprecomand";
 import CropDetails from "./src/components/showcropdetails";
 import PostHarvest from "./src/screens/postharvest";
-
+import InsuranceProviders from "./src/components/info/insurence";
+import LoanSchemesPage from "./src/components/info/loanProvider";
+import SubsidyProgramsPage from "./src/components/info/subsidyProvider";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -96,6 +98,9 @@ const App = () => {
         <Stack.Screen name="CroprRecommand" component={CropRecomand} />
         <Stack.Screen name="CropDetails" component={CropDetails} />
         <Stack.Screen name="postharvest" component={PostHarvest} />
+        <Stack.Screen name="InsurenceProvider" component={InsuranceProviders} />
+        <Stack.Screen name="LoanProvider" component={LoanSchemesPage} />
+        <Stack.Screen name="SubsidyProvider" component={SubsidyProgramsPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

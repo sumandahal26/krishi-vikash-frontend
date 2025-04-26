@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Modal, Linking } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const marketingLinks = [
   { name: "AgriMarket", url: "https://agrimarket.gov.in" },
@@ -22,6 +23,7 @@ const PostHarvest = ({ crop }) => {
   const [modalType, setModalType] = useState(''); // 'marketing' or 'subsidy'
   const [modalTitle, setModalTitle] = useState('');
   const [modalContent, setModalContent] = useState('');
+  const {navigate}= useNavigation()
 
   if (!crop) {
     return (
@@ -68,7 +70,7 @@ const PostHarvest = ({ crop }) => {
 
           {/* Subsidy Provider */}
           <Text style={styles.label}>🌾 Subsidy Provider:</Text>
-          <TouchableOpacity onPress={() => openModal('subsidy')}>
+          <TouchableOpacity onPress={() => navigate("SubsidyProvider")}>
             <Text style={[styles.value, styles.linkText]}>{crop[0]?.subsidy_provider || "N/A"}</Text>
           </TouchableOpacity>
 

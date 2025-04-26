@@ -30,6 +30,14 @@ const GovtSchemes = ({ navigation }) => {
     { 
       id: 4, 
       name: 'Micro Irrigation Fund Scheme', 
+
+
+
+      
+
+
+
+      
       details: 'Provides loans at subsidized rates for micro-irrigation systems like drip and sprinkler irrigation.',
       link: 'https://nmsa.gov.in/'
     },

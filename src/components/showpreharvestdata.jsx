@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Linking, Modal } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const links = {
   market: [
@@ -21,6 +22,7 @@ const links = {
 
 const CropDetails = ({ crop }) => {
   const [showCropDetails, setShowCropDetails] = useState(false);
+  const {navigate} = useNavigation()
   const [showFertilizerDetails, setShowFertilizerDetails] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [currentLinks, setCurrentLinks] = useState([]);
@@ -105,12 +107,12 @@ const CropDetails = ({ crop }) => {
         <Text style={styles.value}>{crop[0]?.pest_control_measures}</Text>
 
         <Text style={styles.label}>🏦 Finance Source:</Text>
-        <TouchableOpacity onPress={() => openLinkModal("finance")}>
+        <TouchableOpacity onPress={() => navigate("LoanProvider")}>
           <Text style={[styles.value, styles.linkText]}>View Finance Options</Text>
         </TouchableOpacity>
 
         <Text style={styles.label}>📜 Insurance Provider:</Text>
-        <TouchableOpacity onPress={() => openLinkModal("insurance")}>
+        <TouchableOpacity onPress={() => navigate("InsurenceProvider")}>
           <Text style={[styles.value, styles.linkText]}>View Insurance Options</Text>
         </TouchableOpacity>
       </View>
