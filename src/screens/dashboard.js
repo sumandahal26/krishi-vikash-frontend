@@ -130,13 +130,20 @@ const DashboardScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         
-        <View style={styles.centeredRow}>
+        <View style={styles.gridRow}>
           <TouchableOpacity
-            style={[styles.iconContainer, styles.lulcContainer]}
+            style={[styles.iconContainer]}
             onPress={() => navigation.navigate("LULC")}
           >
             <FontAwesome5 name="layer-group" size={30} color="#4CAF50" />
             <Text style={styles.navText}>LULC</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.iconContainer]}
+            onPress={() => navigation.navigate("SmartFarming")}
+          >
+            <FontAwesome5 name="tractor" size={30} color="#4CAF50" />
+            <Text style={styles.navText}>Smart-farming</Text>
           </TouchableOpacity>
         </View>
       </View>

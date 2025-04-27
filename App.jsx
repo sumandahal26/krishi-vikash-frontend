@@ -19,6 +19,7 @@ import PostHarvest from "./src/screens/postharvest";
 import InsuranceProviders from "./src/components/info/insurence";
 import LoanSchemesPage from "./src/components/info/loanProvider";
 import SubsidyProgramsPage from "./src/components/info/subsidyProvider";
+import PumpInfoScreen from "./src/screens/smart-farming";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -101,6 +102,7 @@ const App = () => {
         <Stack.Screen name="InsurenceProvider" component={InsuranceProviders} />
         <Stack.Screen name="LoanProvider" component={LoanSchemesPage} />
         <Stack.Screen name="SubsidyProvider" component={SubsidyProgramsPage} />
+        <Stack.Screen name="SmartFarming" component={PumpInfoScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

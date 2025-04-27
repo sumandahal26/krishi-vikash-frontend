@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Linking, ScrollView, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const LoanSchemesPage = () => {
   const schemesData = [
@@ -135,12 +135,15 @@ const LoanSchemesPage = () => {
   };
 
   const renderItemList = (items) => {
-    return items.map((item, index) => (
+    if (!items) return null;
+    if (!Array.isArray(items)) return <Text style={styles.listItem}>• {items}</Text>;
+    return items?.map((item, index) => (
       <Text key={index} style={styles.listItem}>• {item}</Text>
     ));
   };
 
   const renderFAQ = (faqs) => {
+    if (!faqs || !Array.isArray(faqs)) return null;
     return faqs.map((faq, index) => (
       <View key={index} style={styles.faqItem}>
         <Text style={styles.faqQuestion}>Q: {faq.question}</Text>
@@ -150,6 +153,7 @@ const LoanSchemesPage = () => {
   };
 
   const renderFeatures = (features) => {
+    if (!features) return null;
     return Object.entries(features).map(([key, value], index) => {
       if (typeof value === 'object' && !Array.isArray(value)) {
         return (
@@ -267,7 +271,7 @@ const LoanSchemesPage = () => {
             onPress={() => openWebsite(scheme.url)}
           >
             <Text style={styles.buttonText}>Official Website</Text>
-            <MaterialIcons name="open-in-new" size={16} color="white" />
+            <FontAwesome5 name="open-in-new" size={16} color="white" />
           </TouchableOpacity>
           
           {index < schemesData.length - 1 && <View style={styles.divider} />}

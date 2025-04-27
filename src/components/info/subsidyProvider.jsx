@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Linking, ScrollView, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 const SubsidyProgramsPage = () => {
   const subsidyPrograms = [
     {
@@ -67,7 +67,7 @@ const SubsidyProgramsPage = () => {
   const renderHighlights = (highlights) => {
     return highlights.map((item, index) => (
       <View key={index} style={styles.highlightItem}>
-        <MaterialIcons name="star" size={16} color="#f39c12" />
+        <FontAwesome5 name="star" size={16} color="#f39c12" />
         <Text style={styles.highlightText}>{item}</Text>
       </View>
     ));
@@ -93,7 +93,7 @@ const SubsidyProgramsPage = () => {
             onPress={() => openWebsite(program.url)}
           >
             <Text style={styles.buttonText}>Visit Official Website</Text>
-            <MaterialIcons name="open-in-new" size={16} color="white" />
+            <FontAwesome5 name="open-in-new" size={16} color="white" />
           </TouchableOpacity>
           
           {index < subsidyPrograms.length - 1 && <View style={styles.divider} />}

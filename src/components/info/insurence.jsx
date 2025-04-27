@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Linking, ScrollView, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const InsuranceProviders = () => {
     const insuranceData = [
@@ -110,7 +110,7 @@ const InsuranceProviders = () => {
             onPress={() => openWebsite(insurance.url)}
           >
             <Text style={styles.buttonText}>Visit Official Website</Text>
-            <MaterialIcons name="open-in-new" size={16} color="white" />
+            <FontAwesome5 name="open-in-new" size={16} color="white" />
           </TouchableOpacity>
           
           {index < insuranceData.length - 1 && <View style={styles.divider} />}
