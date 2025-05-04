@@ -92,7 +92,7 @@ const CropDetails = ({ crop }) => {
           <Text style={styles.value}>{crop[0].fertilizer.nutrients}</Text>
 
           <Text style={styles.label}>Source:</Text>
-          <Text style={styles.value}>{crop[0].fertilizer.source}</Text>
+          <Text style={styles.value} onPress={()=>navigate("Fertilizers")}>{crop[0].fertilizer.source}</Text>
 
           <Text style={styles.label}>Usage Guidelines:</Text>
           <Text style={styles.value}>{crop[0].fertilizer.usage_guidelines}</Text>
