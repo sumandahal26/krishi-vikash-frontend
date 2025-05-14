@@ -58,9 +58,18 @@ const [displayCrop, setDisplayCrops] = useState()
         <View style={styles.pickerContainer}>
           <Picker selectedValue={crop} onValueChange={(itemValue) => setCrop(itemValue)}>
             <Picker.Item label="Choose a crop..." value="" />
-            <Picker.Item label="Rice" value="Rice" />
-            <Picker.Item label="Wheat" value="Wheat" />
-            <Picker.Item label="Corn" value="Corn" />
+   <Picker.Item label="Rice" value="Rice" />
+<Picker.Item label="Wheat" value="Wheat" />
+<Picker.Item label="Corn" value="Corn" />
+<Picker.Item label="Cotton" value="Cotton" />
+<Picker.Item label="Sugarcane" value="Sugarcane" />
+<Picker.Item label="Millets" value="Millets" />
+<Picker.Item label="Barley" value="Barley" />
+<Picker.Item label="Jute" value="Jute" />
+<Picker.Item label="Groundnut" value="Groundnut" />
+<Picker.Item label="Sorghum" value="Sorghum" />
+<Picker.Item label="Mustard" value="Mustard" />
+<Picker.Item label="Pulses" value="Pulses" />
           </Picker>
         </View>
 
