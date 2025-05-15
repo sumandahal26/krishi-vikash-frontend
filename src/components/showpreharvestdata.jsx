@@ -42,6 +42,7 @@ const CropDetails = ({ crop }) => {
     Linking.openURL(url);
   };
 
+  
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.header}>{crop[0]?.name}</Text>

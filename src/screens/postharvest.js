@@ -20,11 +20,11 @@ const [displayCrop, setDisplayCrops] = useState()
       console.log("API Data:", data);
   
       if (data && data.
-        processingData
+        postHarvest
         
       ) {
         setDisplayCrops(data.
-          processingData
+          postHarvest
           
         );
         

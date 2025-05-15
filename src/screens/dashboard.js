@@ -10,6 +10,7 @@ import {
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const DashboardScreen = ({ navigation }) => {
+  
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [backgroundImage, setBackgroundImage] = useState(null);
