@@ -21,6 +21,7 @@ import LoanSchemesPage from "./src/components/info/loanProvider";
 import SubsidyProgramsPage from "./src/components/info/subsidyProvider";
 import PumpInfoScreen from "./src/screens/smart-farming";
 import FertilizerSources from "./src/components/info/fertilizers";
+import LULCScreen from "./src/screens/lulc";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -105,6 +106,7 @@ const App = () => {
         <Stack.Screen name="SubsidyProvider" component={SubsidyProgramsPage} />
         <Stack.Screen name="SmartFarming" component={PumpInfoScreen} />
         <Stack.Screen name="Fertilizers" component={FertilizerSources} />
+        <Stack.Screen name="LULC" component={LULCScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
